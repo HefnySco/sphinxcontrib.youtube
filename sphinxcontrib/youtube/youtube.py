@@ -3,7 +3,7 @@
 #Import urlparse in Python 2 or urllib.parse in Python 3
 
 try:
-    import urlparse
+    import urllib.parse
 
 except ImportError:
     import urllib.parse as urlparse
@@ -28,7 +28,9 @@ def is_url(s):
 
 def get_video_id(url):
 
-    return urlparse.parse_qs(urlparse.urlparse(url).query)['v'][0]
+    v = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+    if (v == {}): return ""
+    return v['v'][0]
 
 
 def visit(self, node):
